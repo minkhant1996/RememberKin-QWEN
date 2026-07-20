@@ -6,7 +6,8 @@ An AI-powered platform to preserve, organize, and share family memories across g
 > Rememberkin is an agent with truly persistent memory: a 4-layer cognitive memory system (Working → Episodic → Semantic → Procedural) that recalls family facts across sessions, consolidates them over time, and learns household patterns. Built entirely during the hackathon, it directly targets the track's three pillars: **efficient memory storage and retrieval** (Neo4j graph + Qdrant vector hybrid), **timely forgetting of outdated information** (confidence decay and automatic pruning of weak memories), and **recalling critical memories within limited context windows** (an optimized context selector injects only the most relevant facts per turn). Powered end-to-end by Qwen models on Qwen Cloud (`qwen-plus`, `qwen-turbo`, `text-embedding-v3`, `qwen-image-2.0`).
 >
 > 📹 **Demo video:** _[add YouTube/Vimeo link here — max 3 minutes]_
-> ☁️ **Alibaba Cloud deployment:** see [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
+> ☁️ **Alibaba Cloud proof:** all AI runs on Alibaba Cloud Model Studio (DashScope) — see [`backend/src/config/qwen.ts`](backend/src/config/qwen.ts) and the Function Compute deploy definition [`s.yaml`](s.yaml). Full guide: [dev-docs/DEPLOYMENT.md](dev-docs/DEPLOYMENT.md).
+> 🧠 **Also includes:** an MCP server exposing memory as tools, and a self-evaluation harness (scored 100 on memory recall, context relevance, and entity extraction).
 
 ## Overview
 
@@ -39,6 +40,11 @@ Rememberkin helps families:
 
 ## Architecture
 
+![RememberKin architecture — Frontend → Backend → Neo4j / Qdrant / Qwen Cloud, with the 4-layer memory pipeline](assets/architecture-diagram.png)
+
+<details>
+<summary>Text version</summary>
+
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                         Frontend (React)                         │
@@ -68,6 +74,8 @@ Rememberkin helps families:
         │    DB    │   │    DB    │   │   API    │
         └──────────┘   └──────────┘   └──────────┘
 ```
+
+</details>
 
 ## Memory System
 
@@ -120,7 +128,7 @@ Rememberkin implements a 4-layer cognitive memory system:
 1. **Clone the repository**
 ```bash
 git clone <repository-url>
-cd QWEN-hackathon
+cd RememberKin
 ```
 
 2. **Backend Setup**
@@ -211,7 +219,7 @@ VITE_WS_URL=ws://localhost:6100/ws
 ## Project Structure
 
 ```
-QWEN-hackathon/
+RememberKin/
 ├── frontend/
 │   ├── src/
 │   │   ├── components/
@@ -233,7 +241,9 @@ QWEN-hackathon/
 │   └── simulation/
 │       └── family/        # Family test scenarios
 │
-└── docs/
+├── mcp-server/            # MCP stdio server (exposes memory as tools)
+├── assets/                # Architecture diagram + demo photos
+└── dev-docs/              # Architecture, deployment & API docs
 ```
 
 ## Scripts
@@ -283,7 +293,7 @@ See [mcp-server/README.md](mcp-server/README.md) for details.
 
 ## Deployment
 
-The backend deploys to **Alibaba Cloud Function Compute** with the official [Serverless Devs](https://docs.serverless-devs.com) CLI ([`s.yaml`](s.yaml)), with the frontend on OSS static hosting and managed Neo4j Aura + Qdrant Cloud. See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for the full guide (including a single-ECS Docker Compose alternative), or run everything locally:
+The backend deploys to **Alibaba Cloud Function Compute** with the official [Serverless Devs](https://docs.serverless-devs.com) CLI ([`s.yaml`](s.yaml)), with the frontend on OSS static hosting and managed Neo4j Aura + Qdrant Cloud. See [dev-docs/DEPLOYMENT.md](dev-docs/DEPLOYMENT.md) for the full guide (including a single-ECS Docker Compose alternative), or run everything locally:
 
 ```bash
 docker compose up -d --build
