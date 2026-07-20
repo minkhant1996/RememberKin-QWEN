@@ -1,0 +1,25 @@
+{
+  "name": "rememberkin-mcp",
+  "version": "1.0.0",
+  "description": "MCP stdio server exposing the RememberKin family memory agent to any MCP client",
+  "type": "module",
+  "bin": {
+    "rememberkin-mcp": "dist/index.js"
+  },
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.0"
+  }
+}

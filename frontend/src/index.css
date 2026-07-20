@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Warm amber/cream theme for family memories */
+    --background: 45 30% 98%;
+    --foreground: 30 10% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 30 10% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 30 10% 15%;
+
+    /* Muted olive primary - earthy, living, growth */
+    --primary: 80 28% 42%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Soft cream secondary */
+    --secondary: 40 30% 94%;
+    --secondary-foreground: 30 10% 25%;
+
+    --muted: 40 20% 92%;
+    --muted-foreground: 30 10% 45%;
+
+    /* Warm amber accent */
+    --accent: 25 82% 46%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 35 20% 88%;
+    --input: 35 20% 88%;
+    --ring: 80 28% 42%;
+
+    --radius: 0.75rem;
+
+    /* Memory Layer Colors - distinct and meaningful */
+    --memory-working: 45 100% 51%;      /* Bright gold - active, current */
+    --memory-episodic: 199 89% 48%;     /* Ocean blue - experiences, stories */
+    --memory-semantic: 142 71% 45%;     /* Forest green - knowledge, facts */
+    --memory-procedural: 262 83% 58%;   /* Royal purple - patterns, wisdom */
+  }
+
+  .dark {
+    --background: 30 10% 10%;
+    --foreground: 40 20% 95%;
+
+    --card: 30 10% 12%;
+    --card-foreground: 40 20% 95%;
+
+    --popover: 30 10% 12%;
+    --popover-foreground: 40 20% 95%;
+
+    --primary: 80 28% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 30 10% 18%;
+    --secondary-foreground: 40 20% 95%;
+
+    --muted: 30 10% 20%;
+    --muted-foreground: 40 15% 60%;
+
+    --accent: 25 82% 52%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 10% 22%;
+    --input: 30 10% 22%;
+    --ring: 80 28% 55%;
+
+    /* Memory Layer Colors - Dark mode */
+    --memory-working: 45 100% 45%;
+    --memory-episodic: 199 89% 42%;
+    --memory-semantic: 142 71% 38%;
+    --memory-procedural: 262 83% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  /* Legacy support - will be replaced by shadcn components */
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary text-primary-foreground hover:bg-primary/90;
+  }
+
+  .btn-secondary {
+    @apply btn bg-secondary text-secondary-foreground hover:bg-secondary/80;
+  }
+
+  .btn-ghost {
+    @apply btn bg-transparent text-foreground hover:bg-accent/10;
+  }
+
+  .input {
+    @apply w-full px-4 py-2 border border-input rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-ring;
+  }
+
+  /* Memory layer indicators */
+  .memory-layer-working {
+    @apply bg-memory-working/10 border-memory-working text-memory-working;
+  }
+
+  .memory-layer-episodic {
+    @apply bg-memory-episodic/10 border-memory-episodic text-memory-episodic;
+  }
+
+  .memory-layer-semantic {
+    @apply bg-memory-semantic/10 border-memory-semantic text-memory-semantic;
+  }
+
+  .memory-layer-procedural {
+    @apply bg-memory-procedural/10 border-memory-procedural text-memory-procedural;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted rounded-full;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/30 rounded-full hover:bg-muted-foreground/50;
+}
+
+/* Smooth transitions */
+.transition-memory {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}

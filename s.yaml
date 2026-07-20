@@ -1,0 +1,67 @@
+# Serverless Devs config — deploys the backend to Alibaba Cloud Function Compute 3.0
+# as a custom container. Official tooling: https://docs.serverless-devs.com
+#
+# Usage:
+#   npm install -g @serverless-devs/s
+#   s config add            # add your Alibaba Cloud AccessKey (access name: default)
+#   docker build -t registry-intl.ap-southeast-1.aliyuncs.com/<namespace>/rememberkin-backend:latest backend/
+#   docker push registry-intl.ap-southeast-1.aliyuncs.com/<namespace>/rememberkin-backend:latest
+#   export NEO4J_URI=... NEO4J_PASSWORD=... QWEN_API_KEY=... JWT_SECRET=... QDRANT_URL=... QDRANT_API_KEY=...
+#   s deploy
+#
+# Replace <namespace> below with your Alibaba Cloud Container Registry namespace.
+
+edition: 3.0.0
+name: rememberkin
+access: default
+
+vars:
+  region: ap-southeast-1
+
+resources:
+  rememberkin-backend:
+    component: fc3
+    props:
+      region: ${vars.region}
+      functionName: rememberkin-backend
+      description: Rememberkin API — Qwen-powered family memory agent (MemoryAgent track)
+      runtime: custom-container
+      cpu: 1
+      memorySize: 2048
+      diskSize: 512
+      timeout: 600
+      instanceConcurrency: 50
+      # Keep exactly one warm instance: working memory (Layer 1) and the
+      # node-cron consolidation/reminder jobs live in-process.
+      provisionConfig:
+        target: 1
+      scalingConfig:
+        maxInstances: 1
+      customContainerConfig:
+        image: registry-intl.${vars.region}.aliyuncs.com/<namespace>/rememberkin-backend:latest
+        port: 6100
+      environmentVariables:
+        NODE_ENV: production
+        PORT: "6100"
+        NEO4J_URI: ${env(NEO4J_URI)}
+        NEO4J_USER: neo4j
+        NEO4J_PASSWORD: ${env(NEO4J_PASSWORD)}
+        QDRANT_URL: ${env(QDRANT_URL)}
+        QDRANT_API_KEY: ${env(QDRANT_API_KEY)}
+        QWEN_API_KEY: ${env(QWEN_API_KEY)}
+        QWEN_BASE_URL: https://dashscope-intl.aliyuncs.com/compatible-mode/v1
+        JWT_SECRET: ${env(JWT_SECRET)}
+        JWT_EXPIRES_IN: 7d
+        CORS_ORIGIN: ${env(CORS_ORIGIN)}
+      triggers:
+        - triggerName: http
+          triggerType: http
+          triggerConfig:
+            authType: anonymous
+            methods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - PATCH
+              - OPTIONS

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RememberKin — Architecture</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Segoe UI", Inter, Roboto, sans-serif;
+    background: #f6f5f0;
+    color: #2c2c2c;
+    width: 1280px;
+    padding: 36px 40px 44px;
+  }
+  .header { text-align: center; margin-bottom: 26px; }
+  .header .logo {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-size: 30px; font-weight: 800; color: #4d6b3f; letter-spacing: -0.5px;
+  }
+  .header .badge {
+    width: 40px; height: 40px; border-radius: 10px; background: #5f7f4a;
+    color: #fff; display: inline-flex; align-items: center; justify-content: center;
+    font-size: 17px; font-weight: 800;
+  }
+  .header .sub { margin-top: 6px; color: #7a7a70; font-size: 14px; font-weight: 500; }
+  .track {
+    display: inline-block; margin-top: 10px; font-size: 12px; font-weight: 700;
+    color: #5f7f4a; background: #e7efe0; padding: 4px 12px; border-radius: 999px;
+  }
+
+  .layer { border-radius: 16px; padding: 16px 18px; margin-bottom: 16px; }
+  .layer-title { font-size: 12px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+
+  .frontend { background: #eef3fb; border: 1.5px solid #cdddf3; }
+  .frontend .layer-title { color: #3f6bb0; }
+  .backend  { background: #f0f4ec; border: 1.5px solid #d3e0c6; }
+  .backend  .layer-title { color: #5f7f4a; }
+
+  .row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .chip {
+    flex: 1; min-width: 120px; background: #fff; border: 1px solid #e2e2da;
+    border-radius: 10px; padding: 11px 12px; text-align: center;
+    font-size: 13px; font-weight: 600; color: #3a3a34;
+  }
+  .chip small { display: block; font-weight: 500; color: #9a9a90; font-size: 11px; margin-top: 2px; }
+
+  .arrow { text-align: center; color: #9aa892; font-size: 22px; margin: 2px 0 10px; font-weight: 700; }
+
+  .infra { display: flex; gap: 16px; }
+  .infra .box {
+    flex: 1; border-radius: 16px; padding: 16px 18px; background: #fff; border: 1.5px solid #e2e2da;
+  }
+  .infra .box.qwen { background: #fbf3e9; border-color: #f0dcc2; }
+  .infra .box h3 { font-size: 15px; font-weight: 800; margin-bottom: 4px; }
+  .infra .box.graph h3 { color: #3f6bb0; }
+  .infra .box.vector h3 { color: #7a52a8; }
+  .infra .box.qwen h3 { color: #c17d2e; }
+  .infra .box .tag { font-size: 11px; font-weight: 600; color: #9a9a90; margin-bottom: 9px; }
+  .infra .box ul { list-style: none; }
+  .infra .box li { font-size: 12.5px; color: #55554e; padding: 2px 0 2px 14px; position: relative; }
+  .infra .box li::before { content: "•"; position: absolute; left: 2px; color: #b8b8ae; }
+
+  .memory {
+    margin-top: 18px; background: #f4f0fa; border: 1.5px solid #e0d5f0;
+    border-radius: 16px; padding: 16px 18px;
+  }
+  .memory .layer-title { color: #7a52a8; }
+  .mem-row { display: flex; align-items: stretch; gap: 8px; }
+  .mem-step {
+    flex: 1; background: #fff; border: 1px solid #e6ddf3; border-radius: 10px;
+    padding: 11px 10px; text-align: center;
+  }
+  .mem-step .n { font-size: 11px; font-weight: 800; color: #a58fce; }
+  .mem-step .t { font-size: 13.5px; font-weight: 700; color: #3a3a34; margin: 2px 0; }
+  .mem-step .d { font-size: 10.5px; color: #9a9a90; }
+  .mem-arrow { display: flex; align-items: center; color: #b7a6d6; font-size: 18px; font-weight: 700; }
+
+  .cloud-note {
+    text-align: center; margin-top: 18px; font-size: 12.5px; color: #7a7a70; font-weight: 500;
+  }
+  .cloud-note b { color: #5f7f4a; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo"><span class="badge">RK</span> RememberKin</div>
+    <div class="sub">AI-Powered Family Memory Agent — running entirely on Qwen Cloud</div>
+    <div class="track">Track 1 · MemoryAgent</div>
+  </div>
+
+  <!-- FRONTEND -->
+  <div class="layer frontend">
+    <div class="layer-title">Frontend · React + TypeScript (Vite)</div>
+    <div class="row">
+      <div class="chip">Chat</div>
+      <div class="chip">Memory Dashboard</div>
+      <div class="chip">Family Tree</div>
+      <div class="chip">Portraits / Gallery</div>
+      <div class="chip">Events</div>
+      <div class="chip">Simulation</div>
+    </div>
+  </div>
+
+  <div class="arrow">▼ &nbsp; REST /api/v1 · WebSocket · SSE &nbsp; ▼</div>
+
+  <!-- BACKEND -->
+  <div class="layer backend">
+    <div class="layer-title">Backend · Node.js + TypeScript (Express)</div>
+    <div class="row">
+      <div class="chip">Memory Service<small>4-layer engine</small></div>
+      <div class="chip">Agent Service<small>Qwen calls</small></div>
+      <div class="chip">Graph Service<small>Neo4j</small></div>
+      <div class="chip">Vector Service<small>Qdrant</small></div>
+      <div class="chip">Image Service<small>qwen-image</small></div>
+      <div class="chip">Scheduler<small>consolidation cron</small></div>
+    </div>
+  </div>
+
+  <div class="arrow">▼</div>
+
+  <!-- INFRA -->
+  <div class="infra">
+    <div class="box graph">
+      <h3>Neo4j</h3>
+      <div class="tag">Graph database</div>
+      <ul>
+        <li>Family tree &amp; relationships</li>
+        <li>Episodic &amp; semantic memories</li>
+        <li>Detected patterns (procedural)</li>
+      </ul>
+    </div>
+    <div class="box vector">
+      <h3>Qdrant</h3>
+      <div class="tag">Vector database</div>
+      <ul>
+        <li>1024-dim embeddings</li>
+        <li>Semantic similarity search</li>
+        <li>Relevant-memory retrieval</li>
+      </ul>
+    </div>
+    <div class="box qwen">
+      <h3>Qwen Cloud · DashScope</h3>
+      <div class="tag">Model Studio (Alibaba Cloud) · via MCP server</div>
+      <ul>
+        <li>qwen-plus — chat &amp; reasoning</li>
+        <li>qwen-turbo — extraction</li>
+        <li>text-embedding-v3 — embeddings</li>
+        <li>qwen-image — portraits</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- MEMORY PIPELINE -->
+  <div class="memory">
+    <div class="layer-title">4-Layer Cognitive Memory — the core innovation</div>
+    <div class="mem-row">
+      <div class="mem-step">
+        <div class="n">LAYER 1</div><div class="t">Working</div>
+        <div class="d">in-process · 30-min TTL</div>
+      </div>
+      <div class="mem-arrow">▶</div>
+      <div class="mem-step">
+        <div class="n">LAYER 2</div><div class="t">Episodic</div>
+        <div class="d">Neo4j + Qdrant · 30-day TTL</div>
+      </div>
+      <div class="mem-arrow">▶</div>
+      <div class="mem-step">
+        <div class="n">LAYER 3</div><div class="t">Semantic</div>
+        <div class="d">permanent · confidence + decay</div>
+      </div>
+      <div class="mem-arrow">▶</div>
+      <div class="mem-step">
+        <div class="n">LAYER 4</div><div class="t">Procedural</div>
+        <div class="d">learned patterns</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cloud-note">
+    Deployed on <b>Alibaba Cloud</b> — Function Compute (Serverless Devs, <b>s.yaml</b>) · live spend cap · self-evaluation harness
+  </div>
+</body>
+</html>

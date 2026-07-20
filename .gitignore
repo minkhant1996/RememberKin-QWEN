@@ -1,0 +1,73 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+backend/.env
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Local Qdrant vector DB runtime storage
+qdrant_storage/
+
+# Uploaded family photos (Photo Room)
+backend/uploads/
+
+# Hackathon submission (contains sensitive deployment proofs)
+submission/
+
+# Qwen Cloud / DashScope keys and secrets
+backend/qwencloud_keys/
+
+# Claude Code
+.claude/
+CLAUDE.md
+
+# Codex workspace metadata
+.codex/
+AGENTS.md
+
+# Internal docs (kept local, not for public repo)
+docs/

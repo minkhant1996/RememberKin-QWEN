@@ -1,0 +1,23 @@
+{
+  "name": "rememberkin-tests",
+  "version": "1.0.0",
+  "description": "Test scripts for Rememberkin",
+  "scripts": {
+    "test:api": "npx ts-node api-tests.ts",
+    "test:websocket": "npx ts-node websocket-tests.ts",
+    "test:database": "npx ts-node database-tests.ts",
+    "test:all": "npm run test:database && npm run test:api && npm run test:websocket",
+    "test:quick": "npm run test:api"
+  },
+  "dependencies": {
+    "@qdrant/js-client-rest": "^1.7.0",
+    "neo4j-driver": "^5.17.0",
+    "ws": "^8.16.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/ws": "^8.5.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
