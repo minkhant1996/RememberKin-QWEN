@@ -161,7 +161,7 @@ if grep -q "YOUR_QWEN_API_KEY_HERE" "$ENV_FILE"; then
     echo "Please edit: $ENV_FILE"
     echo "And replace YOUR_QWEN_API_KEY_HERE with your actual API key"
     echo ""
-    echo "Get your key from: https://dashscope.console.aliyun.com/"
+    echo "Get your key from: https://home.qwencloud.com/api-keys"
     echo ""
     read -p "Press Enter after you've added your API key (or Ctrl+C to exit)..."
 fi

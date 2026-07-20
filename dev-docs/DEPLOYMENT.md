@@ -34,7 +34,7 @@ Notes on serverless fit:
 ## Prerequisites
 
 1. **Alibaba Cloud account** with an AccessKey pair
-2. **Model Studio / DashScope API key** (international) — https://modelstudio.console.alibabacloud.com/
+2. **Qwen Cloud API key** — https://home.qwencloud.com/api-keys (Model Studio / DashScope also works: https://modelstudio.console.alibabacloud.com/)
 3. **Container Registry (ACR) namespace** (international) — https://cr.console.alibabacloud.com/ (personal edition is free)
 4. **Neo4j Aura** free instance — https://neo4j.com/cloud/aura/ (the `.env.example` `neo4j+s://` URI format)
 5. **Qdrant Cloud** free cluster — https://cloud.qdrant.io/
