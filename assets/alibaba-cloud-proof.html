@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Alibaba Cloud Proof</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,"Segoe UI",Inter,sans-serif; background:#f6f5f0; width:1200px; padding:38px 44px; color:#2c2c2c; }
+  .head { text-align:center; margin-bottom:26px; }
+  .head h1 { font-size:26px; font-weight:800; color:#4d6b3f; }
+  .head p { font-size:14px; color:#7a7a70; margin-top:6px; }
+  .head .pill { display:inline-block; margin-top:10px; font-size:12px; font-weight:700; color:#c17d2e; background:#fbf0e2; padding:5px 14px; border-radius:999px; }
+  .card { background:#1e1e2e; border-radius:14px; overflow:hidden; margin-bottom:22px; box-shadow:0 6px 20px rgba(0,0,0,.08); }
+  .card .bar { background:#2a2a3c; padding:10px 16px; display:flex; align-items:center; gap:8px; }
+  .dot { width:12px; height:12px; border-radius:50%; }
+  .r{background:#ff5f56;} .y{background:#ffbd2e;} .g{background:#27c93f;}
+  .card .file { margin-left:10px; font-size:13px; color:#b9b9c9; font-family:"SF Mono",Menlo,monospace; }
+  pre { padding:18px 20px; font-family:"SF Mono",Menlo,Consolas,monospace; font-size:14px; line-height:1.7; color:#cdd6f4; overflow-x:auto; }
+  .ln { color:#585b70; margin-right:16px; user-select:none; }
+  .kw { color:#cba6f7; } .st { color:#a6e3a1; } .cm { color:#6c7086; } .fn { color:#89b4fa; }
+  .hl { background:rgba(249,226,175,.16); display:inline-block; border-radius:4px; padding:0 3px; }
+  .url { color:#fab387; font-weight:600; }
+  .foot { text-align:center; font-size:13px; color:#7a7a70; margin-top:4px; }
+  .foot b { color:#5f7f4a; }
+</style>
+</head>
+<body>
+  <div class="head">
+    <h1>RememberKin — Alibaba Cloud Integration Proof</h1>
+    <p>All AI runs on Alibaba Cloud Model Studio (DashScope), international endpoint <b>dashscope-intl.aliyuncs.com</b></p>
+    <span class="pill">Alibaba Cloud · Model Studio · DashScope API</span>
+  </div>
+
+  <div class="card">
+    <div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="file">backend/src/config/index.ts</span></div>
+<pre><span class="ln">26</span>  <span class="kw">qwen</span>: {
+<span class="ln">27</span>    <span class="fn">apiKey</span>: process.env.QWEN_API_KEY,
+<span class="ln">28</span>    <span class="fn">baseUrl</span>: process.env.QWEN_BASE_URL || <span class="hl st">'<span class="url">https://dashscope-intl.aliyuncs.com</span>/compatible-mode/v1'</span>,
+<span class="ln">29</span>  },</pre>
+  </div>
+
+  <div class="card">
+    <div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="file">backend/src/services/image.service.ts</span></div>
+<pre><span class="ln">35</span>  <span class="cm">// DashScope Image API endpoint (Alibaba Cloud Model Studio)</span>
+<span class="ln">37</span>  <span class="kw">const</span> <span class="fn">DASHSCOPE_IMAGE_URL</span> = <span class="hl st">'<span class="url">https://dashscope-intl.aliyuncs.com</span>/api/v1/services/aigc/text2image/image-synthesis'</span>;
+<span class="ln">38</span>  <span class="kw">const</span> <span class="fn">DASHSCOPE_MULTIMODAL_URL</span> = <span class="hl st">'<span class="url">https://dashscope-intl.aliyuncs.com</span>/api/v1/.../generation'</span>;</pre>
+  </div>
+
+  <div class="card">
+    <div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="file">backend/src/config/qwen.ts — Qwen models on Alibaba Cloud</span></div>
+<pre><span class="ln">57</span>  <span class="kw">export const</span> <span class="fn">QWEN_MODELS</span> = {
+<span class="ln">60</span>    <span class="fn">CHAT</span>:      <span class="st">'qwen-plus'</span>,          <span class="cm">// chat &amp; reasoning</span>
+<span class="ln">64</span>    <span class="fn">EXTRACTION</span>: <span class="st">'qwen-turbo'</span>,        <span class="cm">// fact extraction</span>
+<span class="ln">70</span>    <span class="fn">EMBED</span>:     <span class="st">'text-embedding-v3'</span>, <span class="cm">// 1024-dim vectors</span>
+<span class="ln">73</span>    <span class="fn">IMAGE</span>:     <span class="st">'qwen-image'</span>,         <span class="cm">// portraits</span>
+<span class="ln">74</span>  };</pre>
+  </div>
+
+  <div class="foot">
+    Repo: <b>github.com/minkhant1996/RememberKin-QWEN</b> · Deploy definition: <b>s.yaml</b> (Alibaba Function Compute)
+  </div>
+</body>
+</html>
